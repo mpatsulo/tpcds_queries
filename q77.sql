@@ -6,7 +6,7 @@ WITH ss AS
   FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim, tpcds_sf1.store
   WHERE ss_sold_date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-03' AS DATE) AND
-  (cast('2000-08-03' AS DATE) + INTERVAL 30 days)
+  (cast('2000-08-03' AS DATE) + INTERVAL '30 days')
     AND ss_store_sk = s_store_sk
   GROUP BY s_store_sk),
     sr AS
@@ -17,7 +17,7 @@ WITH ss AS
   FROM tpcds_sf1.store_returns, tpcds_sf1.date_dim, tpcds_sf1.store
   WHERE sr_returned_date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-03' AS DATE) AND
-  (cast('2000-08-03' AS DATE) + INTERVAL 30 days)
+  (cast('2000-08-03' AS DATE) + INTERVAL '30 days')
     AND sr_store_sk = s_store_sk
   GROUP BY s_store_sk),
     cs AS
@@ -28,7 +28,7 @@ WITH ss AS
   FROM tpcds_sf1.catalog_sales, tpcds_sf1.date_dim
   WHERE cs_sold_date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-03' AS DATE) AND
-  (cast('2000-08-03' AS DATE) + INTERVAL 30 days)
+  (cast('2000-08-03' AS DATE) + INTERVAL '30 days')
   GROUP BY cs_call_center_sk),
     cr AS
   (SELECT
@@ -37,7 +37,7 @@ WITH ss AS
   FROM tpcds_sf1.catalog_returns, tpcds_sf1.date_dim
   WHERE cr_returned_date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-03' AS DATE) AND
-  (cast('2000-08-03' AS DATE) + INTERVAL 30 days)),
+  (cast('2000-08-03' AS DATE) + INTERVAL '30 days')),
     ws AS
   (SELECT
     wp_web_page_sk,
@@ -46,7 +46,7 @@ WITH ss AS
   FROM tpcds_sf1.web_sales, tpcds_sf1.date_dim, tpcds_sf1.web_page
   WHERE ws_sold_date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-03' AS DATE) AND
-  (cast('2000-08-03' AS DATE) + INTERVAL 30 days)
+  (cast('2000-08-03' AS DATE) + INTERVAL '30 days')
     AND ws_web_page_sk = wp_web_page_sk
   GROUP BY wp_web_page_sk),
     wr AS
@@ -57,7 +57,7 @@ WITH ss AS
   FROM tpcds_sf1.web_returns, tpcds_sf1.date_dim, tpcds_sf1.web_page
   WHERE wr_returned_date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-03' AS DATE) AND
-  (cast('2000-08-03' AS DATE) + INTERVAL 30 days)
+  (cast('2000-08-03' AS DATE) + INTERVAL '30 days')
     AND wr_web_page_sk = wp_web_page_sk
   GROUP BY wp_web_page_sk)
 SELECT

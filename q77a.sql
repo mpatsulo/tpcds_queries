@@ -9,7 +9,7 @@ with ss as (
     where
       ss_sold_date_sk = d_date_sk
         and d_date between cast('1998-08-04' as date)
-        and (cast('1998-08-04' as date) + interval 30 days)
+        and (cast('1998-08-04' as date) + interval '30 days')
         and ss_store_sk = s_store_sk
     group by
       s_store_sk),
@@ -23,7 +23,7 @@ sr as (
     where
       sr_returned_date_sk = d_date_sk
         and d_date between cast('1998-08-04' as date)
-        and (cast('1998-08-04' as date) + interval 30 days)
+        and (cast('1998-08-04' as date) + interval '30 days')
         and sr_store_sk = s_store_sk
      group by
        s_store_sk),
@@ -38,7 +38,7 @@ cs as (
     where
       cs_sold_date_sk = d_date_sk
         and d_date between cast('1998-08-04' as date)
-        and (cast('1998-08-04' as date) + interval 30 days)
+        and (cast('1998-08-04' as date) + interval '30 days')
     group by
       cs_call_center_sk),
  cr as (
@@ -50,7 +50,7 @@ cs as (
      where
        cr_returned_date_sk = d_date_sk
          and d_date between cast('1998-08-04' as date)
-         and (cast('1998-08-04' as date) + interval 30 days)),
+         and (cast('1998-08-04' as date) + interval '30 days')),
 ws as ( select wp_web_page_sk,
         sum(ws_ext_sales_price) as sales,
         sum(ws_net_profit) as profit
@@ -59,7 +59,7 @@ ws as ( select wp_web_page_sk,
       tpcds_sf1.web_page
  where ws_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
-                  and (cast('1998-08-04' as date) +  interval 30 days)
+                  and (cast('1998-08-04' as date) +  interval '30 days')
        and ws_web_page_sk = wp_web_page_sk
  group by wp_web_page_sk), 
  wr as
@@ -71,7 +71,7 @@ ws as ( select wp_web_page_sk,
       tpcds_sf1.web_page
  where wr_returned_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
-                  and (cast('1998-08-04' as date) +  interval 30 days)
+                  and (cast('1998-08-04' as date) +  interval '30 days')
        and wr_web_page_sk = wp_web_page_sk
  group by wp_web_page_sk)
  ,

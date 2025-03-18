@@ -6,7 +6,7 @@ FROM tpcds_sf1.item, tpcds_sf1.inventory, tpcds_sf1.date_dim, tpcds_sf1.catalog_
 WHERE i_current_price BETWEEN 68 AND 68 + 30
   AND inv_item_sk = i_item_sk
   AND d_date_sk = inv_date_sk
-  AND d_date BETWEEN cast('2000-02-01' AS DATE) AND (cast('2000-02-01' AS DATE) + INTERVAL 60 days)
+  AND d_date BETWEEN cast('2000-02-01' AS DATE) AND (cast('2000-02-01' AS DATE) + INTERVAL '60 days')
   AND i_manufact_id IN (677, 940, 694, 808)
   AND inv_quantity_on_hand BETWEEN 100 AND 500
   AND cs_item_sk = i_item_sk

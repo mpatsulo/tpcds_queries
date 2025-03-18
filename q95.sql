@@ -14,7 +14,7 @@ FROM
   tpcds_sf1.web_sales ws1, tpcds_sf1.date_dim, tpcds_sf1.customer_address, tpcds_sf1.web_site
 WHERE
   d_date BETWEEN '1999-02-01' AND
-  (CAST('1999-02-01' AS DATE) + INTERVAL 60 DAY)
+  (CAST('1999-02-01' AS DATE) + INTERVAL '60 days')
     AND ws1.ws_ship_date_sk = d_date_sk
     AND ws1.ws_ship_addr_sk = ca_address_sk
     AND ca_state = 'IL'

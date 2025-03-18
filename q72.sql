@@ -22,7 +22,7 @@ FROM tpcds_sf1.catalog_sales
   LEFT OUTER JOIN tpcds_sf1.catalog_returns ON (cr_item_sk = cs_item_sk AND cr_order_number = cs_order_number)
 WHERE d1.d_week_seq = d2.d_week_seq
   AND inv_quantity_on_hand < cs_quantity
-  AND d3.d_date > (cast(d1.d_date AS DATE) + interval 5 days)
+  AND d3.d_date > (cast(d1.d_date AS DATE) + interval '5 days')
   AND hd_buy_potential = '>10000'
   AND d1.d_year = 1999
   AND hd_buy_potential = '>10000'

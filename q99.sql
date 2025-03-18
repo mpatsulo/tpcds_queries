@@ -4,22 +4,22 @@ SELECT
   cc_name,
   sum(CASE WHEN (cs_ship_date_sk - cs_sold_date_sk <= 30)
     THEN 1
-      ELSE 0 END)  AS `30 days `,
+      ELSE 0 END)  AS "30 days",
   sum(CASE WHEN (cs_ship_date_sk - cs_sold_date_sk > 30) AND
     (cs_ship_date_sk - cs_sold_date_sk <= 60)
     THEN 1
-      ELSE 0 END)  AS `31 - 60 days `,
+      ELSE 0 END)  AS "31 - 60 days ",
   sum(CASE WHEN (cs_ship_date_sk - cs_sold_date_sk > 60) AND
     (cs_ship_date_sk - cs_sold_date_sk <= 90)
     THEN 1
-      ELSE 0 END)  AS `61 - 90 days `,
+      ELSE 0 END)  AS "61 - 90 days ",
   sum(CASE WHEN (cs_ship_date_sk - cs_sold_date_sk > 90) AND
     (cs_ship_date_sk - cs_sold_date_sk <= 120)
     THEN 1
-      ELSE 0 END)  AS `91 - 120 days `,
+      ELSE 0 END)  AS "91 - 120 days ",
   sum(CASE WHEN (cs_ship_date_sk - cs_sold_date_sk > 120)
     THEN 1
-      ELSE 0 END)  AS `>120 days `
+      ELSE 0 END)  AS ">120 days "
 FROM
   tpcds_sf1.catalog_sales, tpcds_sf1.warehouse, tpcds_sf1.ship_mode, tpcds_sf1.call_center, tpcds_sf1.date_dim
 WHERE

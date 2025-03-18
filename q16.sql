@@ -5,7 +5,7 @@ SELECT
 FROM
   tpcds_sf1.catalog_sales cs1, tpcds_sf1.date_dim, tpcds_sf1.customer_address, tpcds_sf1.call_center
 WHERE
-  d_date BETWEEN '2002-02-01' AND (CAST('2002-02-01' AS DATE) + INTERVAL 60 days)
+  d_date BETWEEN '2002-02-01' AND (CAST('2002-02-01' AS DATE) + INTERVAL '60 days')
     AND cs1.cs_ship_date_sk = d_date_sk
     AND cs1.cs_ship_addr_sk = ca_address_sk
     AND ca_state = 'GA'

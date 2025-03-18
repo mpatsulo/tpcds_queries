@@ -30,7 +30,7 @@ with ssr as(
       tpcds_sf1.store
     where
       date_sk = d_date_sk and d_date between cast('1998-08-04' as date)
-        and (cast('1998-08-04' as date) + INTERVAL 14 days)
+        and (cast('1998-08-04' as date) + INTERVAL '14 days')
         and store_sk = s_store_sk
     group by
       s_store_id),
@@ -64,7 +64,7 @@ csr as (
     where
       date_sk = d_date_sk
         and d_date between cast('1998-08-04' as date)
-        and (cast('1998-08-04' as date) +  INTERVAL 14 days)
+        and (cast('1998-08-04' as date) +  INTERVAL '14 days')
         and page_sk = cp_catalog_page_sk
     group by
       cp_catalog_page_id),
@@ -102,7 +102,7 @@ wsr as (
       tpcds_sf1.web_site
     where
       date_sk = d_date_sk and d_date between cast('1998-08-04' as date)
-        and (cast('1998-08-04' as date) +  INTERVAL 14 days)
+        and (cast('1998-08-04' as date) +  INTERVAL '14 days')
         and wsr_web_site_sk = web_site_sk
     group by
       web_site_id),
