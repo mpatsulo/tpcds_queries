@@ -1,4 +1,4 @@
-SELECT 1 AS `excess discount amount `
+SELECT 1 AS "excess discount amount "
 FROM
   tpcds_sf1.catalog_sales, tpcds_sf1.item, tpcds_sf1.date_dim
 WHERE

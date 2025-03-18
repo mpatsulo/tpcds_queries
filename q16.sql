@@ -1,7 +1,7 @@
 SELECT
-  count(DISTINCT cs_order_number) AS `order count `,
-  sum(cs_ext_ship_cost) AS `total shipping cost `,
-  sum(cs_net_profit) AS `total net profit `
+  count(DISTINCT cs_order_number) AS "order count ",
+  sum(cs_ext_ship_cost) AS "total shipping cost ",
+  sum(cs_net_profit) AS "total net profit "
 FROM
   tpcds_sf1.catalog_sales cs1, tpcds_sf1.date_dim, tpcds_sf1.customer_address, tpcds_sf1.call_center
 WHERE

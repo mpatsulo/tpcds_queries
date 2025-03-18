@@ -1,4 +1,4 @@
-SELECT sum(ws_ext_discount_amt) AS `Excess Discount Amount `
+SELECT sum(ws_ext_discount_amt) AS "Excess Discount Amount "
 FROM tpcds_sf1.web_sales, tpcds_sf1.item, tpcds_sf1.date_dim
 WHERE i_manufact_id = 350
   AND i_item_sk = ws_item_sk
