@@ -10,8 +10,8 @@ SELECT
   avg(cast(cs_net_profit AS DECIMAL(12, 2))) agg5,
   avg(cast(c_birth_year AS DECIMAL(12, 2))) agg6,
   avg(cast(cd1.cd_dep_count AS DECIMAL(12, 2))) agg7
-FROM tpcds_sf1.catalog_sales, tpcds_sf1.customer_demographics cd1,
-  tpcds_sf1.customer_demographics cd2, tpcds_sf1.customer, tpcds_sf1.customer_address, tpcds_sf1.date_dim, tpcds_sf1.item
+FROM tpcds.catalog_sales, tpcds.customer_demographics cd1,
+  tpcds.customer_demographics cd2, tpcds.customer, tpcds.customer_address, tpcds.date_dim, tpcds.item
 WHERE cs_sold_date_sk = d_date_sk AND
   cs_item_sk = i_item_sk AND
   cs_bill_cdemo_sk = cd1.cd_demo_sk AND

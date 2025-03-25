@@ -5,7 +5,7 @@ SELECT
   i_current_price,
   i_wholesale_cost,
   i_brand
-FROM tpcds_sf1.store, tpcds_sf1.item,
+FROM tpcds.store, tpcds.item,
   (SELECT
     ss_store_sk,
     avg(revenue) AS ave
@@ -14,7 +14,7 @@ FROM tpcds_sf1.store, tpcds_sf1.item,
       ss_store_sk,
       ss_item_sk,
       sum(ss_sales_price) AS revenue
-    FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim
+    FROM tpcds.store_sales, tpcds.date_dim
     WHERE ss_sold_date_sk = d_date_sk AND d_month_seq BETWEEN 1176 AND 1176 + 11
     GROUP BY ss_store_sk, ss_item_sk) sa
   GROUP BY ss_store_sk) sb,
@@ -22,7 +22,7 @@ FROM tpcds_sf1.store, tpcds_sf1.item,
     ss_store_sk,
     ss_item_sk,
     sum(ss_sales_price) AS revenue
-  FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim
+  FROM tpcds.store_sales, tpcds.date_dim
   WHERE ss_sold_date_sk = d_date_sk AND d_month_seq BETWEEN 1176 AND 1176 + 11
   GROUP BY ss_store_sk, ss_item_sk) sc
 WHERE sb.ss_store_sk = sc.ss_store_sk AND

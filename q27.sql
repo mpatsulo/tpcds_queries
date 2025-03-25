@@ -6,7 +6,7 @@ SELECT
   avg(ss_list_price) agg2,
   avg(ss_coupon_amt) agg3,
   avg(ss_sales_price) agg4
-FROM tpcds_sf1.store_sales, tpcds_sf1.customer_demographics, tpcds_sf1.date_dim, tpcds_sf1.store, tpcds_sf1.item
+FROM tpcds.store_sales, tpcds.customer_demographics, tpcds.date_dim, tpcds.store, tpcds.item
 WHERE ss_sold_date_sk = d_date_sk AND
   ss_item_sk = i_item_sk AND
   ss_store_sk = s_store_sk AND

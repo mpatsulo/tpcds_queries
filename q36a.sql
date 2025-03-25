@@ -9,10 +9,10 @@ with results as (
       0 as g_category,
       0 as g_class
     from
-      tpcds_sf1.store_sales,
-      tpcds_sf1.date_dim d1,
-      tpcds_sf1.item,
-      tpcds_sf1.store
+      tpcds.store_sales,
+      tpcds.date_dim d1,
+      tpcds.item,
+      tpcds.store
     where
       d1.d_year = 2001
         and d1.d_date_sk = ss_sold_date_sk

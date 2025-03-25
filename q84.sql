@@ -1,12 +1,12 @@
 SELECT
   c_customer_id AS customer_id,
   concat(c_last_name, ', ', c_first_name) AS customername
-FROM tpcds_sf1.customer
-  , tpcds_sf1.customer_address
-  , tpcds_sf1.customer_demographics
-  , tpcds_sf1.household_demographics
-  , tpcds_sf1.income_band
-  , tpcds_sf1.store_returns
+FROM tpcds.customer
+  , tpcds.customer_address
+  , tpcds.customer_demographics
+  , tpcds.household_demographics
+  , tpcds.income_band
+  , tpcds.store_returns
 WHERE ca_city = 'Edgewood'
   AND c_current_addr_sk = ca_address_sk
   AND ib_lower_bound >= 38128

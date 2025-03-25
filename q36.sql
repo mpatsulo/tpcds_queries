@@ -10,7 +10,7 @@ SELECT
         THEN i_category END
     ORDER BY sum(ss_net_profit) / sum(ss_ext_sales_price) ASC) AS rank_within_parent
 FROM
-  tpcds_sf1.store_sales, tpcds_sf1.date_dim d1, tpcds_sf1.item, tpcds_sf1.store
+  tpcds.store_sales, tpcds.date_dim d1, tpcds.item, tpcds.store
 WHERE
   d1.d_year = 2001
     AND d1.d_date_sk = ss_sold_date_sk

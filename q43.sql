@@ -22,7 +22,7 @@ SELECT
   sum(CASE WHEN (d_day_name = 'Saturday')
     THEN ss_sales_price
       ELSE NULL END) sat_sales
-FROM tpcds_sf1.date_dim, tpcds_sf1.store_sales, tpcds_sf1.store
+FROM tpcds.date_dim, tpcds.store_sales, tpcds.store
 WHERE d_date_sk = ss_sold_date_sk AND
   s_store_sk = ss_store_sk AND
   s_gmt_offset = -5 AND

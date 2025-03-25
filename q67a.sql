@@ -11,7 +11,7 @@ with results as (
         s_store_id,
         sum(coalesce(ss_sales_price * ss_quantity, 0)) sumsales
     from
-      tpcds_sf1.store_sales, tpcds_sf1.date_dim, tpcds_sf1.store, tpcds_sf1.item
+      tpcds.store_sales, tpcds.date_dim, tpcds.store, tpcds.item
     where
       ss_sold_date_sk=d_date_sk
         and ss_item_sk=i_item_sk

@@ -3,8 +3,8 @@ SELECT
   avg(ws_quantity),
   avg(wr_refunded_cash),
   avg(wr_fee)
-FROM tpcds_sf1.web_sales, tpcds_sf1.web_returns, tpcds_sf1.web_page, tpcds_sf1.customer_demographics cd1,
-  tpcds_sf1.customer_demographics cd2, tpcds_sf1.customer_address, tpcds_sf1.date_dim, tpcds_sf1.reason
+FROM tpcds.web_sales, tpcds.web_returns, tpcds.web_page, tpcds.customer_demographics cd1,
+  tpcds.customer_demographics cd2, tpcds.customer_address, tpcds.date_dim, tpcds.reason
 WHERE ws_web_page_sk = wp_web_page_sk
   AND ws_item_sk = wr_item_sk
   AND ws_order_number = wr_order_number

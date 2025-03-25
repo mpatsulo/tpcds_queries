@@ -6,9 +6,9 @@ WITH ws AS
     sum(ws_quantity) ws_qty,
     sum(ws_wholesale_cost) ws_wc,
     sum(ws_sales_price) ws_sp
-  FROM tpcds_sf1.web_sales
-    LEFT JOIN tpcds_sf1.web_returns ON wr_order_number = ws_order_number AND ws_item_sk = wr_item_sk
-    JOIN tpcds_sf1.date_dim ON ws_sold_date_sk = d_date_sk
+  FROM tpcds.web_sales
+    LEFT JOIN tpcds.web_returns ON wr_order_number = ws_order_number AND ws_item_sk = wr_item_sk
+    JOIN tpcds.date_dim ON ws_sold_date_sk = d_date_sk
   WHERE wr_order_number IS NULL
   GROUP BY d_year, ws_item_sk, ws_bill_customer_sk
 ),
@@ -20,9 +20,9 @@ WITH ws AS
     sum(cs_quantity) cs_qty,
     sum(cs_wholesale_cost) cs_wc,
     sum(cs_sales_price) cs_sp
-  FROM tpcds_sf1.catalog_sales
-    LEFT JOIN tpcds_sf1.catalog_returns ON cr_order_number = cs_order_number AND cs_item_sk = cr_item_sk
-    JOIN tpcds_sf1.date_dim ON cs_sold_date_sk = d_date_sk
+  FROM tpcds.catalog_sales
+    LEFT JOIN tpcds.catalog_returns ON cr_order_number = cs_order_number AND cs_item_sk = cr_item_sk
+    JOIN tpcds.date_dim ON cs_sold_date_sk = d_date_sk
   WHERE cr_order_number IS NULL
   GROUP BY d_year, cs_item_sk, cs_bill_customer_sk
   ),
@@ -34,9 +34,9 @@ WITH ws AS
     sum(ss_quantity) ss_qty,
     sum(ss_wholesale_cost) ss_wc,
     sum(ss_sales_price) ss_sp
-  FROM tpcds_sf1.store_sales
-    LEFT JOIN tpcds_sf1.store_returns ON sr_ticket_number = ss_ticket_number AND ss_item_sk = sr_item_sk
-    JOIN tpcds_sf1.date_dim ON ss_sold_date_sk = d_date_sk
+  FROM tpcds.store_sales
+    LEFT JOIN tpcds.store_returns ON sr_ticket_number = ss_ticket_number AND ss_item_sk = sr_item_sk
+    JOIN tpcds.date_dim ON ss_sold_date_sk = d_date_sk
   WHERE sr_ticket_number IS NULL
   GROUP BY d_year, ss_item_sk, ss_customer_sk
   )

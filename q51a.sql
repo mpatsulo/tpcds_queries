@@ -6,7 +6,7 @@ WITH web_tv as (
       sum(ws_sales_price) sumws,
       row_number() over (partition by ws_item_sk order by d_date) rk
     from
-      tpcds_sf1.web_sales, tpcds_sf1.date_dim
+      tpcds.web_sales, tpcds.date_dim
     where
       ws_sold_date_sk=d_date_sk
         and d_month_seq between 1212 and 1212 + 11
@@ -35,7 +35,7 @@ store_tv as (
       sum(ss_sales_price) sumss,
       row_number() over (partition by ss_item_sk order by d_date) rk
     from
-      tpcds_sf1.store_sales, tpcds_sf1.date_dim
+      tpcds.store_sales, tpcds.date_dim
     where
       ss_sold_date_sk = d_date_sk
         and d_month_seq between 1212 and 1212 + 11
@@ -60,31 +60,31 @@ v as (
     select
       item_sk,
       d_date,
-      tpcds_sf1.web_sales,
-      tpcds_sf1.store_sales,
+      tpcds.web_sales,
+      tpcds.store_sales,
       row_number() over (partition by item_sk order by d_date) rk
     from (
         select
           case when web.item_sk is not null
             then web.item_sk
-            else tpcds_sf1.store.item_sk end item_sk,
+            else tpcds.store.item_sk end item_sk,
           case when web.d_date is not null
             then web.d_date
-            else tpcds_sf1.store.d_date end d_date,
-          web.cume_sales tpcds_sf1.web_sales,
-          tpcds_sf1.store.cume_sales tpcds_sf1.store_sales
+            else tpcds.store.d_date end d_date,
+          web.cume_sales tpcds.web_sales,
+          tpcds.store.cume_sales tpcds.store_sales
         from
-          web_v1 web full outer join store_v1 tpcds_sf1.store
-            on (web.item_sk = tpcds_sf1.store.item_sk and web.d_date = tpcds_sf1.store.d_date)))
+          web_v1 web full outer join store_v1 tpcds.store
+            on (web.item_sk = tpcds.store.item_sk and web.d_date = tpcds.store.d_date)))
 select *
 from (
     select
       v1.item_sk,
       v1.d_date,
-      v1.tpcds_sf1.web_sales,
-      v1.tpcds_sf1.store_sales,
-      max(v2.tpcds_sf1.web_sales) web_cumulative,
-      max(v2.tpcds_sf1.store_sales) store_cumulative
+      v1.tpcds.web_sales,
+      v1.tpcds.store_sales,
+      max(v2.tpcds.web_sales) web_cumulative,
+      max(v2.tpcds.store_sales) store_cumulative
     from
       v v1, v v2
     where
@@ -93,8 +93,8 @@ from (
     group by
       v1.item_sk,
       v1.d_date,
-      v1.tpcds_sf1.web_sales,
-      v1.tpcds_sf1.store_sales) x
+      v1.tpcds.web_sales,
+      v1.tpcds.store_sales) x
 where
   web_cumulative > store_cumulative
 order by

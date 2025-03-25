@@ -5,12 +5,12 @@ WITH wscs AS
   FROM (SELECT
     ws_sold_date_sk sold_date_sk,
     ws_ext_sales_price sales_price
-  FROM tpcds_sf1.web_sales) x
+  FROM tpcds.web_sales) x
   UNION ALL
   (SELECT
     cs_sold_date_sk sold_date_sk,
     cs_ext_sales_price sales_price
-  FROM tpcds_sf1.catalog_sales)),
+  FROM tpcds.catalog_sales)),
     wswscs AS
   ( SELECT
     d_week_seq,
@@ -42,7 +42,7 @@ WITH wscs AS
       THEN sales_price
         ELSE NULL END)
     sat_sales
-  FROM wscs, tpcds_sf1.date_dim
+  FROM wscs, tpcds.date_dim
   WHERE d_date_sk = sold_date_sk
   GROUP BY d_week_seq)
 SELECT
@@ -64,8 +64,8 @@ FROM
     thu_sales thu_sales1,
     fri_sales fri_sales1,
     sat_sales sat_sales1
-  FROM wswscs, tpcds_sf1.date_dim
-  WHERE tpcds_sf1.date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001) y,
+  FROM wswscs, tpcds.date_dim
+  WHERE tpcds.date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001) y,
   (SELECT
     wswscs.d_week_seq d_week_seq2,
     sun_sales sun_sales2,
@@ -75,7 +75,7 @@ FROM
     thu_sales thu_sales2,
     fri_sales fri_sales2,
     sat_sales sat_sales2
-  FROM wswscs, tpcds_sf1.date_dim
-  WHERE tpcds_sf1.date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001 + 1) z
+  FROM wswscs, tpcds.date_dim
+  WHERE tpcds.date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001 + 1) z
 WHERE d_week_seq1 = d_week_seq2 - 53
 ORDER BY d_week_seq1

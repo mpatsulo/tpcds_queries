@@ -4,7 +4,7 @@ SELECT
   i_class,
   i_category,
   avg(inv_quantity_on_hand) qoh
-FROM tpcds_sf1.inventory, tpcds_sf1.date_dim, tpcds_sf1.item, tpcds_sf1.warehouse
+FROM tpcds.inventory, tpcds.date_dim, tpcds.item, tpcds.warehouse
 WHERE inv_date_sk = d_date_sk
   AND inv_item_sk = i_item_sk
   AND inv_warehouse_sk = w_warehouse_sk

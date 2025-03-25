@@ -2,7 +2,7 @@ SELECT
   i_brand_id brand_id,
   i_brand brand,
   sum(ss_ext_sales_price) ext_price
-FROM tpcds_sf1.date_dim, tpcds_sf1.store_sales, tpcds_sf1.item
+FROM tpcds.date_dim, tpcds.store_sales, tpcds.item
 WHERE d_date_sk = ss_sold_date_sk
   AND ss_item_sk = i_item_sk
   AND i_manager_id = 28

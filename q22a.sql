@@ -7,7 +7,7 @@ with results as (
       i_category,
       avg(inv_quantity_on_hand) qoh
     from
-      tpcds_sf1.inventory, tpcds_sf1.date_dim, tpcds_sf1.item, tpcds_sf1.warehouse
+      tpcds.inventory, tpcds.date_dim, tpcds.item, tpcds.warehouse
     where
       inv_date_sk = d_date_sk
         and inv_item_sk = i_item_sk

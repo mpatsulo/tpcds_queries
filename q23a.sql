@@ -4,7 +4,7 @@ WITH frequent_ss_items AS
     i_item_sk item_sk,
     d_date solddate,
     count(*) cnt
-  FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim, tpcds_sf1.item
+  FROM tpcds.store_sales, tpcds.date_dim, tpcds.item
   WHERE ss_sold_date_sk = d_date_sk
     AND ss_item_sk = i_item_sk
     AND d_year IN (2000, 2000 + 1, 2000 + 2, 2000 + 3)
@@ -15,7 +15,7 @@ WITH frequent_ss_items AS
   FROM (SELECT
     c_customer_sk,
     sum(ss_quantity * ss_sales_price) csales
-  FROM tpcds_sf1.store_sales, tpcds_sf1.customer, tpcds_sf1.date_dim
+  FROM tpcds.store_sales, tpcds.customer, tpcds.date_dim
   WHERE ss_customer_sk = c_customer_sk
     AND ss_sold_date_sk = d_date_sk
     AND d_year IN (2000, 2000 + 1, 2000 + 2, 2000 + 3)
@@ -24,7 +24,7 @@ WITH frequent_ss_items AS
   (SELECT
     c_customer_sk,
     sum(ss_quantity * ss_sales_price) ssales
-  FROM tpcds_sf1.store_sales, tpcds_sf1.customer
+  FROM tpcds.store_sales, tpcds.customer
   WHERE ss_customer_sk = c_customer_sk
   GROUP BY c_customer_sk
   HAVING sum(ss_quantity * ss_sales_price) > (50 / 100.0) *
@@ -32,7 +32,7 @@ WITH frequent_ss_items AS
     FROM max_store_sales))
 SELECT sum(sales)
 FROM ((SELECT cs_quantity * cs_list_price sales
-FROM tpcds_sf1.catalog_sales, tpcds_sf1.date_dim
+FROM tpcds.catalog_sales, tpcds.date_dim
 WHERE d_year = 2000
   AND d_moy = 2
   AND cs_sold_date_sk = d_date_sk
@@ -42,7 +42,7 @@ FROM frequent_ss_items)
 FROM best_ss_customer))
       UNION ALL
       (SELECT ws_quantity * ws_list_price sales
-      FROM tpcds_sf1.web_sales, tpcds_sf1.date_dim
+      FROM tpcds.web_sales, tpcds.date_dim
       WHERE d_year = 2000
         AND d_moy = 2
         AND ws_sold_date_sk = d_date_sk

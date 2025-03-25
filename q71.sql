@@ -4,13 +4,13 @@ SELECT
   t_hour,
   t_minute,
   sum(ext_price) ext_price
-FROM tpcds_sf1.item,
+FROM tpcds.item,
   (SELECT
      ws_ext_sales_price AS ext_price,
      ws_sold_date_sk AS sold_date_sk,
      ws_item_sk AS sold_item_sk,
      ws_sold_time_sk AS time_sk
-   FROM tpcds_sf1.web_sales, tpcds_sf1.date_dim
+   FROM tpcds.web_sales, tpcds.date_dim
    WHERE d_date_sk = ws_sold_date_sk
      AND d_moy = 11
      AND d_year = 1999
@@ -20,7 +20,7 @@ FROM tpcds_sf1.item,
      cs_sold_date_sk AS sold_date_sk,
      cs_item_sk AS sold_item_sk,
      cs_sold_time_sk AS time_sk
-   FROM tpcds_sf1.catalog_sales, tpcds_sf1.date_dim
+   FROM tpcds.catalog_sales, tpcds.date_dim
    WHERE d_date_sk = cs_sold_date_sk
      AND d_moy = 11
      AND d_year = 1999
@@ -30,11 +30,11 @@ FROM tpcds_sf1.item,
      ss_sold_date_sk AS sold_date_sk,
      ss_item_sk AS sold_item_sk,
      ss_sold_time_sk AS time_sk
-   FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim
+   FROM tpcds.store_sales, tpcds.date_dim
    WHERE d_date_sk = ss_sold_date_sk
      AND d_moy = 11
      AND d_year = 1999
-  ) AS tmp, tpcds_sf1.time_dim
+  ) AS tmp, tpcds.time_dim
 WHERE
   sold_item_sk = i_item_sk
     AND i_manager_id = 1

@@ -7,8 +7,8 @@ SELECT
   sum(sr_net_loss) AS store_returns_loss,
   sum(cs_net_profit) AS catalog_sales_profit
 FROM
-  tpcds_sf1.store_sales, tpcds_sf1.store_returns, tpcds_sf1.catalog_sales, tpcds_sf1.date_dim d1, tpcds_sf1.date_dim d2, tpcds_sf1.date_dim d3,
-  tpcds_sf1.store, tpcds_sf1.item
+  tpcds.store_sales, tpcds.store_returns, tpcds.catalog_sales, tpcds.date_dim d1, tpcds.date_dim d2, tpcds.date_dim d3,
+  tpcds.store, tpcds.item
 WHERE
   d1.d_moy = 4
     AND d1.d_year = 2001

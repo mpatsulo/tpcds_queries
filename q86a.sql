@@ -6,7 +6,7 @@ with results as (
       0 as g_category,
       0 as g_class
     from
-      tpcds_sf1.web_sales, tpcds_sf1.date_dim d1, tpcds_sf1.item
+      tpcds.web_sales, tpcds.date_dim d1, tpcds.item
     where
       d1.d_month_seq between 1212 and 1212 + 11
         and d1.d_date_sk = ws_sold_date_sk

@@ -1,8 +1,8 @@
 SELECT DISTINCT (i_product_name)
-FROM tpcds_sf1.item i1
+FROM tpcds.item i1
 WHERE i_manufact_id BETWEEN 738 AND 738 + 40
   AND (SELECT count(*) AS item_cnt
-FROM tpcds_sf1.item
+FROM tpcds.item
 WHERE (i_manufact = i1.i_manufact AND
   ((i_category = "Women" AND
     (i_color = "powder" OR i_color = "khaki") AND

@@ -28,7 +28,7 @@ SELECT
     THEN 1
       ELSE 0 END)  AS ">120 days "
 FROM
-  tpcds_sf1.store_sales, tpcds_sf1.store_returns, tpcds_sf1.store, tpcds_sf1.date_dim d1, tpcds_sf1.date_dim d2
+  tpcds.store_sales, tpcds.store_returns, tpcds.store, tpcds.date_dim d1, tpcds.date_dim d2
 WHERE
   d2.d_year = 2001
     AND d2.d_moy = 8

@@ -6,7 +6,7 @@ with results as (
       0 as gstate,
       0 as g_county
     from
-      tpcds_sf1.store_sales, tpcds_sf1.date_dim d1, tpcds_sf1.store
+      tpcds.store_sales, tpcds.date_dim d1, tpcds.store
     where
       d1.d_month_seq between 1212 and 1212 + 11
         and d1.d_date_sk = ss_sold_date_sk
@@ -17,7 +17,7 @@ with results as (
                 select
                   s_state as s_state,
                   rank() over (partition by s_state order by sum(ss_net_profit) desc) as ranking
-                from tpcds_sf1.store_sales, tpcds_sf1.store, tpcds_sf1.date_dim
+                from tpcds.store_sales, tpcds.store, tpcds.date_dim
                 where d_month_seq between 1212 and 1212 + 11
                   and d_date_sk = ss_sold_date_sk
                   and s_store_sk  = ss_store_sk

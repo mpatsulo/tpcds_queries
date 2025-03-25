@@ -7,7 +7,7 @@ SELECT
   sum(cs_ext_sales_price) * 100 / sum(sum(cs_ext_sales_price))
   OVER
   (PARTITION BY i_class) AS revenueratio
-FROM tpcds_sf1.catalog_sales, tpcds_sf1.item, tpcds_sf1.date_dim
+FROM tpcds.catalog_sales, tpcds.item, tpcds.date_dim
 WHERE cs_item_sk = i_item_sk
   AND i_category IN ('Sports', 'Books', 'Home')
   AND cs_sold_date_sk = d_date_sk

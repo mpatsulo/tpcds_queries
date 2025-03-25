@@ -2,12 +2,12 @@ WITH ss_items AS
 (SELECT
     i_item_id item_id,
     sum(ss_ext_sales_price) ss_item_rev
-  FROM tpcds_sf1.store_sales, tpcds_sf1.item, tpcds_sf1.date_dim
+  FROM tpcds.store_sales, tpcds.item, tpcds.date_dim
   WHERE ss_item_sk = i_item_sk
     AND d_date IN (SELECT d_date
-  FROM tpcds_sf1.date_dim
+  FROM tpcds.date_dim
   WHERE d_week_seq = (SELECT d_week_seq
-  FROM tpcds_sf1.date_dim
+  FROM tpcds.date_dim
   WHERE d_date = '2000-01-03'))
     AND ss_sold_date_sk = d_date_sk
   GROUP BY i_item_id),
@@ -15,12 +15,12 @@ WITH ss_items AS
   (SELECT
     i_item_id item_id,
     sum(cs_ext_sales_price) cs_item_rev
-  FROM tpcds_sf1.catalog_sales, tpcds_sf1.item, tpcds_sf1.date_dim
+  FROM tpcds.catalog_sales, tpcds.item, tpcds.date_dim
   WHERE cs_item_sk = i_item_sk
     AND d_date IN (SELECT d_date
-  FROM tpcds_sf1.date_dim
+  FROM tpcds.date_dim
   WHERE d_week_seq = (SELECT d_week_seq
-  FROM tpcds_sf1.date_dim
+  FROM tpcds.date_dim
   WHERE d_date = '2000-01-03'))
     AND cs_sold_date_sk = d_date_sk
   GROUP BY i_item_id),
@@ -28,12 +28,12 @@ WITH ss_items AS
   (SELECT
     i_item_id item_id,
     sum(ws_ext_sales_price) ws_item_rev
-  FROM tpcds_sf1.web_sales, tpcds_sf1.item, tpcds_sf1.date_dim
+  FROM tpcds.web_sales, tpcds.item, tpcds.date_dim
   WHERE ws_item_sk = i_item_sk
     AND d_date IN (SELECT d_date
-  FROM tpcds_sf1.date_dim
+  FROM tpcds.date_dim
   WHERE d_week_seq = (SELECT d_week_seq
-  FROM tpcds_sf1.date_dim
+  FROM tpcds.date_dim
   WHERE d_date = '2000-01-03'))
     AND ws_sold_date_sk = d_date_sk
   GROUP BY i_item_id)

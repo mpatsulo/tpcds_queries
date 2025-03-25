@@ -10,7 +10,7 @@ SELECT
         THEN s_state END
     ORDER BY sum(ss_net_profit) DESC) AS rank_within_parent
 FROM
-  tpcds_sf1.store_sales, tpcds_sf1.date_dim d1, tpcds_sf1.store
+  tpcds.store_sales, tpcds.date_dim d1, tpcds.store
 WHERE
   d1.d_month_seq BETWEEN 1200 AND 1200 + 11
     AND d1.d_date_sk = ss_sold_date_sk
@@ -23,7 +23,7 @@ WHERE
         rank()
         OVER (PARTITION BY s_state
           ORDER BY sum(ss_net_profit) DESC) AS ranking
-      FROM tpcds_sf1.store_sales, tpcds_sf1.store, tpcds_sf1.date_dim
+      FROM tpcds.store_sales, tpcds.store, tpcds.date_dim
       WHERE d_month_seq BETWEEN 1200 AND 1200 + 11
         AND d_date_sk = ss_sold_date_sk
         AND s_store_sk = ss_store_sk

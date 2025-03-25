@@ -126,7 +126,7 @@ FROM (
            THEN ws_net_paid * ws_quantity
              ELSE 0 END) AS dec_net
        FROM
-         tpcds_sf1.web_sales, tpcds_sf1.warehouse, tpcds_sf1.date_dim, tpcds_sf1.time_dim, tpcds_sf1.ship_mode
+         tpcds.web_sales, tpcds.warehouse, tpcds.date_dim, tpcds.time_dim, tpcds.ship_mode
        WHERE
          ws_warehouse_sk = w_warehouse_sk
            AND ws_sold_date_sk = d_date_sk
@@ -220,7 +220,7 @@ FROM (
            THEN cs_net_paid_inc_tax * cs_quantity
              ELSE 0 END) AS dec_net
        FROM
-         tpcds_sf1.catalog_sales, tpcds_sf1.warehouse, tpcds_sf1.date_dim, tpcds_sf1.time_dim, tpcds_sf1.ship_mode
+         tpcds.catalog_sales, tpcds.warehouse, tpcds.date_dim, tpcds.time_dim, tpcds.ship_mode
        WHERE
          cs_warehouse_sk = w_warehouse_sk
            AND cs_sold_date_sk = d_date_sk

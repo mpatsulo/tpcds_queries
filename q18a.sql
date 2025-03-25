@@ -13,8 +13,8 @@ with results as (
       cast(c_birth_year as decimal(12,2)) agg6,
       cast(cd1.cd_dep_count as decimal(12,2)) agg7
     from
-      tpcds_sf1.catalog_sales, tpcds_sf1.customer_demographics cd1, tpcds_sf1.customer_demographics cd2, tpcds_sf1.customer,
-      tpcds_sf1.customer_address, tpcds_sf1.date_dim, tpcds_sf1.item
+      tpcds.catalog_sales, tpcds.customer_demographics cd1, tpcds.customer_demographics cd2, tpcds.customer,
+      tpcds.customer_address, tpcds.date_dim, tpcds.item
     where
       cs_sold_date_sk = d_date_sk
         and cs_item_sk = i_item_sk

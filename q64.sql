@@ -3,8 +3,8 @@ WITH cs_ui AS
     cs_item_sk,
     sum(cs_ext_list_price) AS sale,
     sum(cr_refunded_cash + cr_reversed_charge + cr_store_credit) AS refund
-  FROM tpcds_sf1.catalog_sales
-    , tpcds_sf1.catalog_returns
+  FROM tpcds.catalog_sales
+    , tpcds.catalog_returns
   WHERE cs_item_sk = cr_item_sk
     AND cs_order_number = cr_order_number
   GROUP BY cs_item_sk
@@ -30,10 +30,10 @@ WITH cs_ui AS
     sum(ss_wholesale_cost) s1,
     sum(ss_list_price) s2,
     sum(ss_coupon_amt) s3
-  FROM tpcds_sf1.store_sales, tpcds_sf1.store_returns, cs_ui, tpcds_sf1.date_dim d1, tpcds_sf1.date_dim d2, tpcds_sf1.date_dim d3,
-    tpcds_sf1.store, tpcds_sf1.customer, tpcds_sf1.customer_demographics cd1, tpcds_sf1.customer_demographics cd2,
-    tpcds_sf1.promotion, tpcds_sf1.household_demographics hd1, tpcds_sf1.household_demographics hd2,
-    tpcds_sf1.customer_address ad1, tpcds_sf1.customer_address ad2, tpcds_sf1.income_band ib1, tpcds_sf1.income_band ib2, tpcds_sf1.item
+  FROM tpcds.store_sales, tpcds.store_returns, cs_ui, tpcds.date_dim d1, tpcds.date_dim d2, tpcds.date_dim d3,
+    tpcds.store, tpcds.customer, tpcds.customer_demographics cd1, tpcds.customer_demographics cd2,
+    tpcds.promotion, tpcds.household_demographics hd1, tpcds.household_demographics hd2,
+    tpcds.customer_address ad1, tpcds.customer_address ad2, tpcds.income_band ib1, tpcds.income_band ib2, tpcds.item
   WHERE ss_store_sk = s_store_sk AND
     ss_sold_date_sk = d1.d_date_sk AND
     ss_customer_sk = c_customer_sk AND

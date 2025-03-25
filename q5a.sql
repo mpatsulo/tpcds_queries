@@ -15,7 +15,7 @@ with ssr as(
           cast(0 as decimal(7,2)) as return_amt,
           cast(0 as decimal(7,2)) as net_loss
         from
-          tpcds_sf1.store_sales
+          tpcds.store_sales
         union all
         select
           sr_store_sk as store_sk,
@@ -25,9 +25,9 @@ with ssr as(
           sr_return_amt as return_amt,
           sr_net_loss as net_loss
         from
-          tpcds_sf1.store_returns) salesreturns,
-      tpcds_sf1.date_dim,
-      tpcds_sf1.store
+          tpcds.store_returns) salesreturns,
+      tpcds.date_dim,
+      tpcds.store
     where
       date_sk = d_date_sk and d_date between cast('1998-08-04' as date)
         and (cast('1998-08-04' as date) + INTERVAL '14 days')
@@ -49,7 +49,7 @@ csr as (
           cs_net_profit as profit,
           cast(0 as decimal(7,2)) as return_amt,
           cast(0 as decimal(7,2)) as net_loss
-        from tpcds_sf1.catalog_sales
+        from tpcds.catalog_sales
         union all
         select
           cr_catalog_page_sk as page_sk,
@@ -58,9 +58,9 @@ csr as (
           cast(0 as decimal(7,2)) as profit,
           cr_return_amount as return_amt,
           cr_net_loss as net_loss
-        from tpcds_sf1.catalog_returns) salesreturns,
-      tpcds_sf1.date_dim,
-      tpcds_sf1.catalog_page
+        from tpcds.catalog_returns) salesreturns,
+      tpcds.date_dim,
+      tpcds.catalog_page
     where
       date_sk = d_date_sk
         and d_date between cast('1998-08-04' as date)
@@ -84,7 +84,7 @@ wsr as (
           cast(0 as decimal(7,2)) as return_amt,
           cast(0 as decimal(7,2)) as net_loss
         from
-          tpcds_sf1.web_sales
+          tpcds.web_sales
         union all
         select
           ws_web_site_sk as wsr_web_site_sk,
@@ -94,12 +94,12 @@ wsr as (
           wr_return_amt as return_amt,
           wr_net_loss as net_loss
         from
-          tpcds_sf1.web_returns
-        left outer join tpcds_sf1.web_sales on (
+          tpcds.web_returns
+        left outer join tpcds.web_sales on (
           wr_item_sk = ws_item_sk and wr_order_number = ws_order_number)
       ) salesreturns,
-      tpcds_sf1.date_dim,
-      tpcds_sf1.web_site
+      tpcds.date_dim,
+      tpcds.web_site
     where
       date_sk = d_date_sk and d_date between cast('1998-08-04' as date)
         and (cast('1998-08-04' as date) +  INTERVAL '14 days')
@@ -115,8 +115,8 @@ results as (
       sum(profit) as profit
     from (
       select
-        'tpcds_sf1.store channel' as channel,
-        'tpcds_sf1.store' || s_store_id as id,
+        'tpcds.store channel' as channel,
+        'tpcds.store' || s_store_id as id,
         sales,
         returns,
         (profit - profit_loss) as profit
@@ -125,7 +125,7 @@ results as (
       union all
       select
         'catalog channel' as channel,
-        'tpcds_sf1.catalog_page' || cp_catalog_page_id as id,
+        'tpcds.catalog_page' || cp_catalog_page_id as id,
         sales,
         returns,
         (profit - profit_loss) as profit
@@ -134,7 +134,7 @@ results as (
       union all
       select
         'web channel' as channel,
-        'tpcds_sf1.web_site' || web_site_id as id,
+        'tpcds.web_site' || web_site_id as id,
         sales,
         returns,
         (profit - profit_loss) as profit

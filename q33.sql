@@ -3,10 +3,10 @@ WITH ss AS (
     i_manufact_id,
     sum(ss_ext_sales_price) total_sales
   FROM
-    tpcds_sf1.store_sales, tpcds_sf1.date_dim, tpcds_sf1.customer_address, tpcds_sf1.item
+    tpcds.store_sales, tpcds.date_dim, tpcds.customer_address, tpcds.item
   WHERE
     i_manufact_id IN (SELECT i_manufact_id
-    FROM tpcds_sf1.item
+    FROM tpcds.item
     WHERE i_category IN ('Electronics'))
       AND ss_item_sk = i_item_sk
       AND ss_sold_date_sk = d_date_sk
@@ -18,11 +18,11 @@ WITH ss AS (
 (SELECT
     i_manufact_id,
     sum(cs_ext_sales_price) total_sales
-  FROM tpcds_sf1.catalog_sales, tpcds_sf1.date_dim, tpcds_sf1.customer_address, tpcds_sf1.item
+  FROM tpcds.catalog_sales, tpcds.date_dim, tpcds.customer_address, tpcds.item
   WHERE
     i_manufact_id IN (
       SELECT i_manufact_id
-      FROM tpcds_sf1.item
+      FROM tpcds.item
       WHERE
         i_category IN ('Electronics'))
       AND cs_item_sk = i_item_sk
@@ -37,10 +37,10 @@ WITH ss AS (
       i_manufact_id,
       sum(ws_ext_sales_price) total_sales
     FROM
-      tpcds_sf1.web_sales, tpcds_sf1.date_dim, tpcds_sf1.customer_address, tpcds_sf1.item
+      tpcds.web_sales, tpcds.date_dim, tpcds.customer_address, tpcds.item
     WHERE
       i_manufact_id IN (SELECT i_manufact_id
-      FROM tpcds_sf1.item
+      FROM tpcds.item
       WHERE i_category IN ('Electronics'))
         AND ws_item_sk = i_item_sk
         AND ws_sold_date_sk = d_date_sk

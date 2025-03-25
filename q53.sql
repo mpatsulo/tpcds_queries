@@ -5,7 +5,7 @@ FROM
     sum(ss_sales_price) sum_sales,
     avg(sum(ss_sales_price))
     OVER (PARTITION BY i_manufact_id) avg_quarterly_sales
-  FROM tpcds_sf1.item, tpcds_sf1.store_sales, tpcds_sf1.date_dim, tpcds_sf1.store
+  FROM tpcds.item, tpcds.store_sales, tpcds.date_dim, tpcds.store
   WHERE ss_item_sk = i_item_sk AND
     ss_sold_date_sk = d_date_sk AND
     ss_store_sk = s_store_sk AND

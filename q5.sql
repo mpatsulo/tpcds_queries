@@ -13,7 +13,7 @@ WITH ssr AS
        ss_net_profit AS profit,
        cast(0 AS DECIMAL(7, 2)) AS return_amt,
        cast(0 AS DECIMAL(7, 2)) AS net_loss
-     FROM tpcds_sf1.store_sales
+     FROM tpcds.store_sales
      UNION ALL
      SELECT
        sr_store_sk AS store_sk,
@@ -22,8 +22,8 @@ WITH ssr AS
        cast(0 AS DECIMAL(7, 2)) AS profit,
        sr_return_amt AS return_amt,
        sr_net_loss AS net_loss
-     FROM tpcds_sf1.store_returns)
-    salesreturns, tpcds_sf1.date_dim, tpcds_sf1.store
+     FROM tpcds.store_returns)
+    salesreturns, tpcds.date_dim, tpcds.store
   WHERE date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-23' AS DATE)
   AND ((cast('2000-08-23' AS DATE) + INTERVAL '14 days'))
@@ -44,7 +44,7 @@ WITH ssr AS
        cs_net_profit AS profit,
        cast(0 AS DECIMAL(7, 2)) AS return_amt,
        cast(0 AS DECIMAL(7, 2)) AS net_loss
-     FROM tpcds_sf1.catalog_sales
+     FROM tpcds.catalog_sales
      UNION ALL
      SELECT
        cr_catalog_page_sk AS page_sk,
@@ -53,8 +53,8 @@ WITH ssr AS
        cast(0 AS DECIMAL(7, 2)) AS profit,
        cr_return_amount AS return_amt,
        cr_net_loss AS net_loss
-     FROM tpcds_sf1.catalog_returns
-    ) salesreturns, tpcds_sf1.date_dim, tpcds_sf1.catalog_page
+     FROM tpcds.catalog_returns
+    ) salesreturns, tpcds.date_dim, tpcds.catalog_page
   WHERE date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-23' AS DATE)
   AND ((cast('2000-08-23' AS DATE) + INTERVAL '14 days'))
@@ -76,7 +76,7 @@ WITH ssr AS
        ws_net_profit AS profit,
        cast(0 AS DECIMAL(7, 2)) AS return_amt,
        cast(0 AS DECIMAL(7, 2)) AS net_loss
-     FROM tpcds_sf1.web_sales
+     FROM tpcds.web_sales
      UNION ALL
      SELECT
        ws_web_site_sk AS wsr_web_site_sk,
@@ -85,11 +85,11 @@ WITH ssr AS
        cast(0 AS DECIMAL(7, 2)) AS profit,
        wr_return_amt AS return_amt,
        wr_net_loss AS net_loss
-     FROM tpcds_sf1.web_returns
-       LEFT OUTER JOIN tpcds_sf1.web_sales ON
+     FROM tpcds.web_returns
+       LEFT OUTER JOIN tpcds.web_sales ON
                                    (wr_item_sk = ws_item_sk
                                      AND wr_order_number = ws_order_number)
-    ) salesreturns, tpcds_sf1.date_dim, tpcds_sf1.web_site
+    ) salesreturns, tpcds.date_dim, tpcds.web_site
   WHERE date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-23' AS DATE)
   AND ((cast('2000-08-23' AS DATE) + INTERVAL '14 days'))
@@ -103,8 +103,8 @@ SELECT
   sum(profit) AS profit
 FROM
   (SELECT
-     'tpcds_sf1.store channel' AS channel,
-     concat('tpcds_sf1.store', s_store_id) AS id,
+     'tpcds.store channel' AS channel,
+     concat('tpcds.store', s_store_id) AS id,
      sales,
      returns,
      (profit - profit_loss) AS profit
@@ -112,7 +112,7 @@ FROM
    UNION ALL
    SELECT
      'catalog channel' AS channel,
-     concat('tpcds_sf1.catalog_page', cp_catalog_page_id) AS id,
+     concat('tpcds.catalog_page', cp_catalog_page_id) AS id,
      sales,
      returns,
      (profit - profit_loss) AS profit
@@ -120,7 +120,7 @@ FROM
    UNION ALL
    SELECT
      'web channel' AS channel,
-     concat('tpcds_sf1.web_site', web_site_id) AS id,
+     concat('tpcds.web_site', web_site_id) AS id,
      sales,
      returns,
      (profit - profit_loss) AS profit

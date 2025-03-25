@@ -11,7 +11,7 @@ WITH ssales AS
     i_units,
     i_size,
     sum(ss_net_paid) netpaid
-  FROM tpcds_sf1.store_sales, tpcds_sf1.store_returns, tpcds_sf1.store, tpcds_sf1.item, tpcds_sf1.customer, tpcds_sf1.customer_address
+  FROM tpcds.store_sales, tpcds.store_returns, tpcds.store, tpcds.item, tpcds.customer, tpcds.customer_address
   WHERE ss_ticket_number = sr_ticket_number
     AND ss_item_sk = sr_item_sk
     AND ss_customer_sk = c_customer_sk

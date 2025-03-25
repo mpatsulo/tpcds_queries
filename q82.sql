@@ -2,7 +2,7 @@ SELECT
   i_item_id,
   i_item_desc,
   i_current_price
-FROM tpcds_sf1.item, tpcds_sf1.inventory, tpcds_sf1.date_dim, tpcds_sf1.store_sales
+FROM tpcds.item, tpcds.inventory, tpcds.date_dim, tpcds.store_sales
 WHERE i_current_price BETWEEN 62 AND 62 + 30
   AND inv_item_sk = i_item_sk
   AND d_date_sk = inv_date_sk

@@ -1,11 +1,11 @@
 SELECT
   s_store_name,
   sum(ss_net_profit)
-FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim, tpcds_sf1.store,
+FROM tpcds.store_sales, tpcds.date_dim, tpcds.store,
   (SELECT ca_zip
   FROM (
          (SELECT substr(ca_zip, 1, 5) ca_zip
-         FROM tpcds_sf1.customer_address
+         FROM tpcds.customer_address
          WHERE substr(ca_zip, 1, 5) IN (
                '24128','76232','65084','87816','83926','77556','20548',
                '26231','43848','15126','91137','61265','98294','25782',
@@ -71,7 +71,7 @@ FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim, tpcds_sf1.store,
            (SELECT
              substr(ca_zip, 1, 5) ca_zip,
              count(*) cnt
-           FROM tpcds_sf1.customer_address, tpcds_sf1.customer
+           FROM tpcds.customer_address, tpcds.customer
            WHERE ca_address_sk = c_current_addr_sk AND
              c_preferred_cust_flag = 'Y'
            GROUP BY ca_zip

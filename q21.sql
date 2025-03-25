@@ -9,7 +9,7 @@ FROM (
          sum(CASE WHEN (cast(d_date AS DATE) >= cast('2000-03-11' AS DATE))
            THEN inv_quantity_on_hand
              ELSE 0 END) AS inv_after
-       FROM tpcds_sf1.inventory, tpcds_sf1.warehouse, tpcds_sf1.item, tpcds_sf1.date_dim
+       FROM tpcds.inventory, tpcds.warehouse, tpcds.item, tpcds.date_dim
        WHERE i_current_price BETWEEN 0.99 AND 1.49
          AND i_item_sk = inv_item_sk
          AND inv_warehouse_sk = w_warehouse_sk

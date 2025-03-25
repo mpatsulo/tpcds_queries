@@ -1,5 +1,5 @@
 SELECT sum(ss_quantity)
-FROM tpcds_sf1.store_sales, tpcds_sf1.store, tpcds_sf1.customer_demographics, tpcds_sf1.customer_address, tpcds_sf1.date_dim
+FROM tpcds.store_sales, tpcds.store, tpcds.customer_demographics, tpcds.customer_address, tpcds.date_dim
 WHERE s_store_sk = ss_store_sk
   AND ss_sold_date_sk = d_date_sk AND d_year = 2001
   AND

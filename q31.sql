@@ -4,7 +4,7 @@ WITH ss AS
     d_qoy,
     d_year,
     sum(ss_ext_sales_price) AS s_sales
-  FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim, tpcds_sf1.customer_address
+  FROM tpcds.store_sales, tpcds.date_dim, tpcds.customer_address
   WHERE ss_sold_date_sk = d_date_sk
     AND ss_addr_sk = ca_address_sk
   GROUP BY ca_county, d_qoy, d_year),
@@ -14,7 +14,7 @@ WITH ss AS
     d_qoy,
     d_year,
     sum(ws_ext_sales_price) AS w_sales
-  FROM tpcds_sf1.web_sales, tpcds_sf1.date_dim, tpcds_sf1.customer_address
+  FROM tpcds.web_sales, tpcds.date_dim, tpcds.customer_address
   WHERE ws_sold_date_sk = d_date_sk
     AND ws_bill_addr_sk = ca_address_sk
   GROUP BY ca_county, d_qoy, d_year)

@@ -3,11 +3,11 @@ WITH customer_total_return AS
     sr_customer_sk AS ctr_customer_sk,
     sr_store_sk AS ctr_store_sk,
     sum(sr_return_amt) AS ctr_total_return
-  FROM tpcds_sf1.store_returns, tpcds_sf1.date_dim
+  FROM tpcds.store_returns, tpcds.date_dim
   WHERE sr_returned_date_sk = d_date_sk AND d_year = 2000
   GROUP BY sr_customer_sk, sr_store_sk)
 SELECT c_customer_id
-FROM customer_total_return ctr1, tpcds_sf1.store, tpcds_sf1.customer
+FROM customer_total_return ctr1, tpcds.store, tpcds.customer
 WHERE ctr1.ctr_total_return >
   (SELECT avg(ctr_total_return) * 1.2
   FROM customer_total_return ctr2

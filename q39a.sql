@@ -17,7 +17,7 @@ WITH inv AS
     d_moy,
     stddev_samp(inv_quantity_on_hand) stdev,
     avg(inv_quantity_on_hand) mean
-  FROM tpcds_sf1.inventory, tpcds_sf1.item, tpcds_sf1.warehouse, tpcds_sf1.date_dim
+  FROM tpcds.inventory, tpcds.item, tpcds.warehouse, tpcds.date_dim
   WHERE inv_item_sk = i_item_sk
     AND inv_warehouse_sk = w_warehouse_sk
     AND inv_date_sk = d_date_sk

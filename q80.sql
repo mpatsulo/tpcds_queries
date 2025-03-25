@@ -4,12 +4,12 @@ WITH ssr AS
     sum(ss_ext_sales_price) AS sales,
     sum(coalesce(sr_return_amt, 0)) AS returns,
     sum(ss_net_profit - coalesce(sr_net_loss, 0)) AS profit
-  FROM tpcds_sf1.store_sales
-    LEFT OUTER JOIN tpcds_sf1.store_returns ON
+  FROM tpcds.store_sales
+    LEFT OUTER JOIN tpcds.store_returns ON
                                     (ss_item_sk = sr_item_sk AND
                                       ss_ticket_number = sr_ticket_number)
     ,
-    tpcds_sf1.date_dim, tpcds_sf1.store, tpcds_sf1.item, tpcds_sf1.promotion
+    tpcds.date_dim, tpcds.store, tpcds.item, tpcds.promotion
   WHERE ss_sold_date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-23' AS DATE)
   AND (cast('2000-08-23' AS DATE) + INTERVAL '30 days')
@@ -25,12 +25,12 @@ WITH ssr AS
     sum(cs_ext_sales_price) AS sales,
     sum(coalesce(cr_return_amount, 0)) AS returns,
     sum(cs_net_profit - coalesce(cr_net_loss, 0)) AS profit
-  FROM tpcds_sf1.catalog_sales
-    LEFT OUTER JOIN tpcds_sf1.catalog_returns ON
+  FROM tpcds.catalog_sales
+    LEFT OUTER JOIN tpcds.catalog_returns ON
                                       (cs_item_sk = cr_item_sk AND
                                         cs_order_number = cr_order_number)
     ,
-    tpcds_sf1.date_dim, tpcds_sf1.catalog_page, tpcds_sf1.item, tpcds_sf1.promotion
+    tpcds.date_dim, tpcds.catalog_page, tpcds.item, tpcds.promotion
   WHERE cs_sold_date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-23' AS DATE)
   AND (cast('2000-08-23' AS DATE) + INTERVAL '30 days')
@@ -46,11 +46,11 @@ WITH ssr AS
     sum(ws_ext_sales_price) AS sales,
     sum(coalesce(wr_return_amt, 0)) AS returns,
     sum(ws_net_profit - coalesce(wr_net_loss, 0)) AS profit
-  FROM tpcds_sf1.web_sales
-    LEFT OUTER JOIN tpcds_sf1.web_returns ON
+  FROM tpcds.web_sales
+    LEFT OUTER JOIN tpcds.web_returns ON
                                   (ws_item_sk = wr_item_sk AND ws_order_number = wr_order_number)
     ,
-    tpcds_sf1.date_dim, tpcds_sf1.web_site, tpcds_sf1.item, tpcds_sf1.promotion
+    tpcds.date_dim, tpcds.web_site, tpcds.item, tpcds.promotion
   WHERE ws_sold_date_sk = d_date_sk
     AND d_date BETWEEN cast('2000-08-23' AS DATE)
   AND (cast('2000-08-23' AS DATE) + INTERVAL '30 days')
@@ -67,8 +67,8 @@ SELECT
   sum(returns) AS returns,
   sum(profit) AS profit
 FROM (SELECT
-        'tpcds_sf1.store channel' AS channel,
-        concat('tpcds_sf1.store', store_id) AS id,
+        'tpcds.store channel' AS channel,
+        concat('tpcds.store', store_id) AS id,
         sales,
         returns,
         profit
@@ -76,7 +76,7 @@ FROM (SELECT
       UNION ALL
       SELECT
         'catalog channel' AS channel,
-        concat('tpcds_sf1.catalog_page', catalog_page_id) AS id,
+        concat('tpcds.catalog_page', catalog_page_id) AS id,
         sales,
         returns,
         profit
@@ -84,7 +84,7 @@ FROM (SELECT
       UNION ALL
       SELECT
         'web channel' AS channel,
-        concat('tpcds_sf1.web_site', web_site_id) AS id,
+        concat('tpcds.web_site', web_site_id) AS id,
         sales,
         returns,
         profit

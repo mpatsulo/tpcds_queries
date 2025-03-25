@@ -2,7 +2,7 @@ WITH ssci AS (
   SELECT
     ss_customer_sk customer_sk,
     ss_item_sk item_sk
-  FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim
+  FROM tpcds.store_sales, tpcds.date_dim
   WHERE ss_sold_date_sk = d_date_sk
     AND d_month_seq BETWEEN 1200 AND 1200 + 11
   GROUP BY ss_customer_sk, ss_item_sk),
@@ -10,7 +10,7 @@ WITH ssci AS (
     SELECT
       cs_bill_customer_sk customer_sk,
       cs_item_sk item_sk
-    FROM tpcds_sf1.catalog_sales, tpcds_sf1.date_dim
+    FROM tpcds.catalog_sales, tpcds.date_dim
     WHERE cs_sold_date_sk = d_date_sk
       AND d_month_seq BETWEEN 1200 AND 1200 + 11
     GROUP BY cs_bill_customer_sk, cs_item_sk)

@@ -4,7 +4,7 @@ SELECT
   i_manufact_id,
   i_manufact,
   sum(ss_ext_sales_price) ext_price
-FROM tpcds_sf1.date_dim, tpcds_sf1.store_sales, tpcds_sf1.item, tpcds_sf1.customer, tpcds_sf1.customer_address, tpcds_sf1.store
+FROM tpcds.date_dim, tpcds.store_sales, tpcds.item, tpcds.customer, tpcds.customer_address, tpcds.store
 WHERE d_date_sk = ss_sold_date_sk
   AND ss_item_sk = i_item_sk
   AND i_manager_id = 8

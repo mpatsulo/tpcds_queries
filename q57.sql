@@ -14,7 +14,7 @@ WITH v1 AS (
     OVER
     (PARTITION BY i_category, i_brand, cc_name
       ORDER BY d_year, d_moy) rn
-  FROM tpcds_sf1.item, tpcds_sf1.catalog_sales, tpcds_sf1.date_dim, tpcds_sf1.call_center
+  FROM tpcds.item, tpcds.catalog_sales, tpcds.date_dim, tpcds.call_center
   WHERE cs_item_sk = i_item_sk AND
     cs_sold_date_sk = d_date_sk AND
     cc_call_center_sk = cs_call_center_sk AND

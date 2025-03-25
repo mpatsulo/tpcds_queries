@@ -5,7 +5,7 @@ with ss as (
       sum(ss_ext_sales_price) as sales,
       sum(ss_net_profit) as profit
     from
-      tpcds_sf1.store_sales, tpcds_sf1.date_dim, tpcds_sf1.store
+      tpcds.store_sales, tpcds.date_dim, tpcds.store
     where
       ss_sold_date_sk = d_date_sk
         and d_date between cast('1998-08-04' as date)
@@ -19,7 +19,7 @@ sr as (
       sum(sr_return_amt) as returns,
       sum(sr_net_loss) as profit_loss
     from
-      tpcds_sf1.store_returns, tpcds_sf1.date_dim, tpcds_sf1.store
+      tpcds.store_returns, tpcds.date_dim, tpcds.store
     where
       sr_returned_date_sk = d_date_sk
         and d_date between cast('1998-08-04' as date)
@@ -33,8 +33,8 @@ cs as (
       sum(cs_ext_sales_price) as sales,
       sum(cs_net_profit) as profit
     from
-      tpcds_sf1.catalog_sales,
-      tpcds_sf1.date_dim
+      tpcds.catalog_sales,
+      tpcds.date_dim
     where
       cs_sold_date_sk = d_date_sk
         and d_date between cast('1998-08-04' as date)
@@ -45,8 +45,8 @@ cs as (
      select
        sum(cr_return_amount) as returns,
        sum(cr_net_loss) as profit_loss
-     from tpcds_sf1.catalog_returns,
-       tpcds_sf1.date_dim
+     from tpcds.catalog_returns,
+       tpcds.date_dim
      where
        cr_returned_date_sk = d_date_sk
          and d_date between cast('1998-08-04' as date)
@@ -54,9 +54,9 @@ cs as (
 ws as ( select wp_web_page_sk,
         sum(ws_ext_sales_price) as sales,
         sum(ws_net_profit) as profit
- from tpcds_sf1.web_sales,
-      tpcds_sf1.date_dim,
-      tpcds_sf1.web_page
+ from tpcds.web_sales,
+      tpcds.date_dim,
+      tpcds.web_page
  where ws_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  interval '30 days')
@@ -66,9 +66,9 @@ ws as ( select wp_web_page_sk,
  (select wp_web_page_sk,
         sum(wr_return_amt) as returns,
         sum(wr_net_loss) as profit_loss
- from tpcds_sf1.web_returns,
-      tpcds_sf1.date_dim,
-      tpcds_sf1.web_page
+ from tpcds.web_returns,
+      tpcds.date_dim,
+      tpcds.web_page
  where wr_returned_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  interval '30 days')
@@ -82,7 +82,7 @@ ws as ( select wp_web_page_sk,
         , sum(returns) as returns
         , sum(profit) as profit
  from 
- (select 'tpcds_sf1.store channel' as channel
+ (select 'tpcds.store channel' as channel
         , ss.s_store_sk as id
         , sales
         , coalesce(returns, 0) as returns

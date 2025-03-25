@@ -6,7 +6,7 @@ WITH web_v1 AS (
     OVER (PARTITION BY ws_item_sk
       ORDER BY d_date
       ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) cume_sales
-  FROM tpcds_sf1.web_sales, tpcds_sf1.date_dim
+  FROM tpcds.web_sales, tpcds.date_dim
   WHERE ws_sold_date_sk = d_date_sk
     AND d_month_seq BETWEEN 1200 AND 1200 + 11
     AND ws_item_sk IS NOT NULL
@@ -19,7 +19,7 @@ WITH web_v1 AS (
       OVER (PARTITION BY ss_item_sk
         ORDER BY d_date
         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) cume_sales
-    FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim
+    FROM tpcds.store_sales, tpcds.date_dim
     WHERE ss_sold_date_sk = d_date_sk
       AND d_month_seq BETWEEN 1200 AND 1200 + 11
       AND ss_item_sk IS NOT NULL

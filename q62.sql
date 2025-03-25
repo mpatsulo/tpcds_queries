@@ -21,7 +21,7 @@ SELECT
     THEN 1
       ELSE 0 END)  AS ">120 days "
 FROM
-  tpcds_sf1.web_sales, tpcds_sf1.warehouse, tpcds_sf1.ship_mode, tpcds_sf1.web_site, tpcds_sf1.date_dim
+  tpcds.web_sales, tpcds.warehouse, tpcds.ship_mode, tpcds.web_site, tpcds.date_dim
 WHERE
   d_month_seq BETWEEN 1200 AND 1200 + 11
     AND ws_ship_date_sk = d_date_sk

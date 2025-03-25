@@ -11,11 +11,11 @@ FROM (SELECT
 FROM (SELECT
   ss_item_sk item_sk,
   avg(ss_net_profit) rank_col
-FROM tpcds_sf1.store_sales ss1
+FROM tpcds.store_sales ss1
 WHERE ss_store_sk = 4
 GROUP BY ss_item_sk
 HAVING avg(ss_net_profit) > 0.9 * (SELECT avg(ss_net_profit) rank_col
-FROM tpcds_sf1.store_sales
+FROM tpcds.store_sales
 WHERE ss_store_sk = 4
   AND ss_addr_sk IS NULL
 GROUP BY ss_store_sk)) V1) V11
@@ -29,16 +29,16 @@ WHERE rnk < 11) asceding,
   FROM (SELECT
     ss_item_sk item_sk,
     avg(ss_net_profit) rank_col
-  FROM tpcds_sf1.store_sales ss1
+  FROM tpcds.store_sales ss1
   WHERE ss_store_sk = 4
   GROUP BY ss_item_sk
   HAVING avg(ss_net_profit) > 0.9 * (SELECT avg(ss_net_profit) rank_col
-  FROM tpcds_sf1.store_sales
+  FROM tpcds.store_sales
   WHERE ss_store_sk = 4
     AND ss_addr_sk IS NULL
   GROUP BY ss_store_sk)) V2) V21
   WHERE rnk < 11) descending,
-  tpcds_sf1.item i1, tpcds_sf1.item i2
+  tpcds.item i1, tpcds.item i2
 WHERE asceding.rnk = descending.rnk
   AND i1.i_item_sk = asceding.item_sk
   AND i2.i_item_sk = descending.item_sk

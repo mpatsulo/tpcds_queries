@@ -3,7 +3,7 @@ WITH customer_total_return AS
     wr_returning_customer_sk AS ctr_customer_sk,
     ca_state AS ctr_state,
     sum(wr_return_amt) AS ctr_total_return
-  FROM tpcds_sf1.web_returns, tpcds_sf1.date_dim, tpcds_sf1.customer_address
+  FROM tpcds.web_returns, tpcds.date_dim, tpcds.customer_address
   WHERE wr_returned_date_sk = d_date_sk
     AND d_year = 2002
     AND wr_returning_addr_sk = ca_address_sk
@@ -22,7 +22,7 @@ SELECT
   c_email_address,
   c_last_review_date,
   ctr_total_return
-FROM customer_total_return ctr1, tpcds_sf1.customer_address, tpcds_sf1.customer
+FROM customer_total_return ctr1, tpcds.customer_address, tpcds.customer
 WHERE ctr1.ctr_total_return > (SELECT avg(ctr_total_return) * 1.2
 FROM customer_total_return ctr2
 WHERE ctr1.ctr_state = ctr2.ctr_state)

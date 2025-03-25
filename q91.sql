@@ -4,8 +4,8 @@ SELECT
   cc_manager Manager,
   sum(cr_net_loss) Returns_Loss
 FROM
-  tpcds_sf1.call_center, tpcds_sf1.catalog_returns, tpcds_sf1.date_dim, tpcds_sf1.customer, tpcds_sf1.customer_address,
-  tpcds_sf1.customer_demographics, tpcds_sf1.household_demographics
+  tpcds.call_center, tpcds.catalog_returns, tpcds.date_dim, tpcds.customer, tpcds.customer_address,
+  tpcds.customer_demographics, tpcds.household_demographics
 WHERE
   cr_call_center_sk = cc_call_center_sk
     AND cr_returned_date_sk = d_date_sk

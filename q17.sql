@@ -14,7 +14,7 @@ SELECT
   avg(cs_quantity) AS catalog_sales_quantityave,
   stddev_samp(cs_quantity) / avg(cs_quantity) AS catalog_sales_quantitystdev,
   stddev_samp(cs_quantity) / avg(cs_quantity) AS catalog_sales_quantitycov
-FROM tpcds_sf1.store_sales, tpcds_sf1.store_returns, tpcds_sf1.catalog_sales, tpcds_sf1.date_dim d1, tpcds_sf1.date_dim d2, tpcds_sf1.date_dim d3, tpcds_sf1.store, tpcds_sf1.item
+FROM tpcds.store_sales, tpcds.store_returns, tpcds.catalog_sales, tpcds.date_dim d1, tpcds.date_dim d2, tpcds.date_dim d3, tpcds.store, tpcds.item
 WHERE d1.d_quarter_name = '2001Q1'
   AND d1.d_date_sk = ss_sold_date_sk
   AND i_item_sk = ss_item_sk

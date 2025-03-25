@@ -8,7 +8,7 @@ with results as (
         ss_coupon_amt agg3,
         ss_sales_price agg4
     from
-      tpcds_sf1.store_sales, tpcds_sf1.customer_demographics, tpcds_sf1.date_dim, tpcds_sf1.store, tpcds_sf1.item
+      tpcds.store_sales, tpcds.customer_demographics, tpcds.date_dim, tpcds.store, tpcds.item
     where
       ss_sold_date_sk = d_date_sk
         and ss_item_sk = i_item_sk

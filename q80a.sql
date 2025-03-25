@@ -6,12 +6,12 @@ with ssr as (
       sum(coalesce(sr_return_amt, 0)) as returns,
       sum(ss_net_profit - coalesce(sr_net_loss, 0)) as profit
     from
-      tpcds_sf1.store_sales left outer join tpcds_sf1.store_returns on (
+      tpcds.store_sales left outer join tpcds.store_returns on (
           ss_item_sk = sr_item_sk and ss_ticket_number = sr_ticket_number),
-      tpcds_sf1.date_dim,
-      tpcds_sf1.store,
-      tpcds_sf1.item,
-      tpcds_sf1.promotion
+      tpcds.date_dim,
+      tpcds.store,
+      tpcds.item,
+      tpcds.promotion
     where
       ss_sold_date_sk = d_date_sk
         and d_date between cast('1998-08-04' as date)
@@ -30,12 +30,12 @@ csr as (
       sum(coalesce(cr_return_amount, 0)) as returns,
       sum(cs_net_profit - coalesce(cr_net_loss, 0)) as profit
     from
-      tpcds_sf1.catalog_sales left outer join tpcds_sf1.catalog_returns on
+      tpcds.catalog_sales left outer join tpcds.catalog_returns on
           (cs_item_sk = cr_item_sk and cs_order_number = cr_order_number),
-      tpcds_sf1.date_dim,
-      tpcds_sf1.catalog_page,
-      tpcds_sf1.item,
-      tpcds_sf1.promotion
+      tpcds.date_dim,
+      tpcds.catalog_page,
+      tpcds.item,
+      tpcds.promotion
     where
       cs_sold_date_sk = d_date_sk
         and d_date between cast('1998-08-04' as date)
@@ -54,12 +54,12 @@ wsr as (
       sum(coalesce(wr_return_amt, 0)) as returns,
       sum(ws_net_profit - coalesce(wr_net_loss, 0)) as profit
     from
-      tpcds_sf1.web_sales left outer join tpcds_sf1.web_returns on (
+      tpcds.web_sales left outer join tpcds.web_returns on (
           ws_item_sk = wr_item_sk and ws_order_number = wr_order_number),
-      tpcds_sf1.date_dim,
-      tpcds_sf1.web_site,
-      tpcds_sf1.item,
-      tpcds_sf1.promotion
+      tpcds.date_dim,
+      tpcds.web_site,
+      tpcds.item,
+      tpcds.promotion
     where
       ws_sold_date_sk = d_date_sk
         and d_date between cast('1998-08-04' as date)
@@ -80,8 +80,8 @@ results as (
       sum(profit) as profit
     from (
         select
-          'tpcds_sf1.store channel' as channel,
-          'tpcds_sf1.store' || store_id as id,
+          'tpcds.store channel' as channel,
+          'tpcds.store' || store_id as id,
           sales,
           returns,
           profit
@@ -90,7 +90,7 @@ results as (
         union all
         select
           'catalog channel' as channel,
-          'tpcds_sf1.catalog_page' || catalog_page_id as id,
+          'tpcds.catalog_page' || catalog_page_id as id,
           sales,
           returns,
           profit
@@ -99,7 +99,7 @@ results as (
         union all
         select
           'web channel' as channel,
-          'tpcds_sf1.web_site' || web_site_id as id,
+          'tpcds.web_site' || web_site_id as id,
           sales,
           returns,
           profit

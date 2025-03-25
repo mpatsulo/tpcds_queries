@@ -7,7 +7,7 @@ WITH year_total AS (
     sum(ss_net_paid) year_total,
     's' sale_type
   FROM
-    tpcds_sf1.customer, tpcds_sf1.store_sales, tpcds_sf1.date_dim
+    tpcds.customer, tpcds.store_sales, tpcds.date_dim
   WHERE c_customer_sk = ss_customer_sk
     AND ss_sold_date_sk = d_date_sk
     AND d_year IN (2001, 2001 + 1)
@@ -22,7 +22,7 @@ WITH year_total AS (
     sum(ws_net_paid) year_total,
     'w' sale_type
   FROM
-    tpcds_sf1.customer, tpcds_sf1.web_sales, tpcds_sf1.date_dim
+    tpcds.customer, tpcds.web_sales, tpcds.date_dim
   WHERE c_customer_sk = ws_bill_customer_sk
     AND ws_sold_date_sk = d_date_sk
     AND d_year IN (2001, 2001 + 1)

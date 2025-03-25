@@ -3,7 +3,7 @@ WITH customer_total_return AS
     cr_returning_customer_sk AS ctr_customer_sk,
     ca_state AS ctr_state,
     sum(cr_return_amt_inc_tax) AS ctr_total_return
-  FROM tpcds_sf1.catalog_returns, tpcds_sf1.date_dim, tpcds_sf1.customer_address
+  FROM tpcds.catalog_returns, tpcds.date_dim, tpcds.customer_address
   WHERE cr_returned_date_sk = d_date_sk
     AND d_year = 2000
     AND cr_returning_addr_sk = ca_address_sk
@@ -25,7 +25,7 @@ SELECT
   ca_gmt_offset,
   ca_location_type,
   ctr_total_return
-FROM customer_total_return ctr1, tpcds_sf1.customer_address, tpcds_sf1.customer
+FROM customer_total_return ctr1, tpcds.customer_address, tpcds.customer
 WHERE ctr1.ctr_total_return > (SELECT avg(ctr_total_return) * 1.2
 FROM customer_total_return ctr2
 WHERE ctr1.ctr_state = ctr2.ctr_state)

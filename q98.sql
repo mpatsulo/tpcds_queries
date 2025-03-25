@@ -8,7 +8,7 @@ SELECT
   OVER
   (PARTITION BY i_class) AS revenueratio
 FROM
-  tpcds_sf1.store_sales, tpcds_sf1.item, tpcds_sf1.date_dim
+  tpcds.store_sales, tpcds.item, tpcds.date_dim
 WHERE
   ss_item_sk = i_item_sk
     AND i_category IN ('Sports', 'Books', 'Home')

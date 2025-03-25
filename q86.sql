@@ -10,7 +10,7 @@ SELECT
         THEN i_category END
     ORDER BY sum(ws_net_paid) DESC) AS rank_within_parent
 FROM
-  tpcds_sf1.web_sales, tpcds_sf1.date_dim d1, tpcds_sf1.item
+  tpcds.web_sales, tpcds.date_dim d1, tpcds.item
 WHERE
   d1.d_month_seq BETWEEN 1200 AND 1200 + 11
     AND d1.d_date_sk = ws_sold_date_sk

@@ -23,7 +23,7 @@ WITH wss AS
     sum(CASE WHEN (d_day_name = 'Saturday')
       THEN ss_sales_price
         ELSE NULL END) sat_sales
-  FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim
+  FROM tpcds.store_sales, tpcds.date_dim
   WHERE d_date_sk = ss_sold_date_sk
   GROUP BY d_week_seq, ss_store_sk
 )
@@ -50,7 +50,7 @@ FROM
     thu_sales thu_sales1,
     fri_sales fri_sales1,
     sat_sales sat_sales1
-  FROM wss, tpcds_sf1.store, tpcds_sf1.date_dim d
+  FROM wss, tpcds.store, tpcds.date_dim d
   WHERE d.d_week_seq = wss.d_week_seq AND
     ss_store_sk = s_store_sk AND
     d_month_seq BETWEEN 1212 AND 1212 + 11) y,
@@ -65,7 +65,7 @@ FROM
     thu_sales thu_sales2,
     fri_sales fri_sales2,
     sat_sales sat_sales2
-  FROM wss, tpcds_sf1.store, tpcds_sf1.date_dim d
+  FROM wss, tpcds.store, tpcds.date_dim d
   WHERE d.d_week_seq = wss.d_week_seq AND
     ss_store_sk = s_store_sk AND
     d_month_seq BETWEEN 1212 + 12 AND 1212 + 23) x

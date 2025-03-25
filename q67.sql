@@ -24,7 +24,7 @@ FROM
       d_moy,
       s_store_id,
       sum(coalesce(ss_sales_price * ss_quantity, 0)) sumsales
-    FROM tpcds_sf1.store_sales, tpcds_sf1.date_dim, tpcds_sf1.store, tpcds_sf1.item
+    FROM tpcds.store_sales, tpcds.date_dim, tpcds.store, tpcds.item
     WHERE ss_sold_date_sk = d_date_sk
       AND ss_item_sk = i_item_sk
       AND ss_store_sk = s_store_sk

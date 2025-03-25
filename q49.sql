@@ -23,10 +23,10 @@ FROM (
            (cast(sum(coalesce(wr.wr_return_amt, 0)) AS DECIMAL(15, 4)) /
              cast(sum(coalesce(ws.ws_net_paid, 0)) AS DECIMAL(15, 4))) AS currency_ratio
          FROM
-           tpcds_sf1.web_sales ws LEFT OUTER JOIN tpcds_sf1.web_returns wr
+           tpcds.web_sales ws LEFT OUTER JOIN tpcds.web_returns wr
              ON (ws.ws_order_number = wr.wr_order_number AND
              ws.ws_item_sk = wr.wr_item_sk)
-           , tpcds_sf1.date_dim
+           , tpcds.date_dim
          WHERE
            wr.wr_return_amt > 10000
              AND ws.ws_net_profit > 1
@@ -65,10 +65,10 @@ FROM (
            (cast(sum(coalesce(cr.cr_return_amount, 0)) AS DECIMAL(15, 4)) /
              cast(sum(coalesce(cs.cs_net_paid, 0)) AS DECIMAL(15, 4))) AS currency_ratio
          FROM
-           tpcds_sf1.catalog_sales cs LEFT OUTER JOIN tpcds_sf1.catalog_returns cr
+           tpcds.catalog_sales cs LEFT OUTER JOIN tpcds.catalog_returns cr
              ON (cs.cs_order_number = cr.cr_order_number AND
              cs.cs_item_sk = cr.cr_item_sk)
-           , tpcds_sf1.date_dim
+           , tpcds.date_dim
          WHERE
            cr.cr_return_amount > 10000
              AND cs.cs_net_profit > 1
@@ -107,9 +107,9 @@ FROM (
            (cast(sum(coalesce(sr.sr_return_amt, 0)) AS DECIMAL(15, 4)) /
              cast(sum(coalesce(sts.ss_net_paid, 0)) AS DECIMAL(15, 4))) AS currency_ratio
          FROM
-           tpcds_sf1.store_sales sts LEFT OUTER JOIN tpcds_sf1.store_returns sr
+           tpcds.store_sales sts LEFT OUTER JOIN tpcds.store_returns sr
              ON (sts.ss_ticket_number = sr.sr_ticket_number AND sts.ss_item_sk = sr.sr_item_sk)
-           , tpcds_sf1.date_dim
+           , tpcds.date_dim
          WHERE
            sr.sr_return_amt > 10000
              AND sts.ss_net_profit > 1
